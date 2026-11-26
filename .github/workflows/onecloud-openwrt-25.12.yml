@@ -17,7 +17,7 @@ env:
   FEEDS_CONF: feeds.conf.default
   #DIY_P1_SH: Scripts/quick.sh
   DIY_P1_SH: Scripts/setup.sh
-  DIY_P2_SH: Scripts/Settings.sh
+  DIY_P2_SH: Scripts/Settings2.sh
   DIY_P3_SH: Scripts/false
   DIY_P4_SH: Scripts/openclash32.sh
   DIY_P5_SH: Scripts/false
