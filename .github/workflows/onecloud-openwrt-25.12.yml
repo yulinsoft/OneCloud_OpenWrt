@@ -307,7 +307,7 @@ jobs:
       with:
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: OpenWrt_${{ env.OWRT_SOURCE }}_${{ env.OWRT_DATE }}
+        tag: ${{ env.OWRT_BRANCH }}_${{ env.OWRT_DATE }}
         body: |
           自用玩客云一站式直刷固件[${{ matrix.brun_type }}]！
           请使用双USB公头线刷机！
