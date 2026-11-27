@@ -47,10 +47,14 @@ cat <<EOF >>burn/commands.txt
 PARTITION:boot:sparse:boot.simg
 PARTITION:rootfs:sparse:rootfs.simg
 EOF
+cat burn/commands.txt
 sudo cp burn/commands.txt burn2/
+cat burn2/commands.txt
 prefix=$(ls openwrt/bin/targets/*/*/*.img | sed 's/\.img$//')
 burnimg=${prefix}.burn.img
-burnimg2=${prefix}.zqb.burn.img
+echo $burnimg
+burnimg2=${burnimg//onecloud/zqb}
+echo $burnimg2
 ./AmlImg pack $burnimg burn/
 ./AmlImg pack $burnimg2 burn2/
 for f in openwrt/bin/targets/*/*/*.burn.img; do
