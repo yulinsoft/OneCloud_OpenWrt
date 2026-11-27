@@ -36,7 +36,7 @@ sudo img2simg openwrt.img burn/rootfs.simg
 sudo cp -r burn burn2
 sudo mkdir zqbboot-mnt
 sudo mount ${loop}p1 zqbboot-mnt
-sudo cp -r /workdir/zqb/* zqbboot-mnt/
+sudo cp -r $GITHUB_WORKSPACE/zqb/* zqbboot-mnt/
 sudo sync
 sudo umount zqbboot-mnt
 sudo rm burn2/boot.simg
