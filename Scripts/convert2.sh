@@ -4,7 +4,6 @@ curl -L -o ./AmlImg https://github.com/rmoyulong/AmlImg/releases/download/$ver/A
 chmod +x ./AmlImg
 curl -L -o ./uboot.img https://github.com/rmoyulong/u-boot-onecloud/releases/download/Onecloud_Uboot_23.12.24_18.15.09/eMMC.burn.img
 ./AmlImg unpack ./uboot.img burn/
-
 gunzip openwrt/bin/targets/*/*/*.gz
 diskimg=$(ls openwrt/bin/targets/*/*/*.img)
 loop=$(sudo losetup --find --show --partscan $diskimg)
@@ -34,15 +33,26 @@ sudo umount ${boot_img_mnt}
 sudo umount ${rootfs_img_mnt}
 sudo img2simg ${loop}p1 burn/boot.simg
 sudo img2simg openwrt.img burn/rootfs.simg
+sudo cp -r burn burn2
+sudo mkdir zqbboot-mnt
+sudo mount ${loop}p1 zqbboot-mnt
+sudo cp -r /workdir/zqb/* zqbboot-mnt/
+sudo sync
+sudo umount zqbboot-mnt
+sudo rm burn2/boot.simg
+sudo img2simg ${loop}p1 burn2/boot.simg
 sudo rm -rf *.img
 sudo losetup -d $loop
 cat <<EOF >>burn/commands.txt
 PARTITION:boot:sparse:boot.simg
 PARTITION:rootfs:sparse:rootfs.simg
 EOF
+sudo cp burn/commands.txt burn2/
 prefix=$(ls openwrt/bin/targets/*/*/*.img | sed 's/\.img$//')
 burnimg=${prefix}.burn.img
+burnimg2=${prefix}.zqb.burn.img
 ./AmlImg pack $burnimg burn/
+./AmlImg pack $burnimg2 burn2/
 for f in openwrt/bin/targets/*/*/*.burn.img; do
   sha256sum "$f" >"${f}.sha"
   xz -9 --threads=0 --compress "$f"
