@@ -11,15 +11,15 @@ sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/confi
 sed -i "s/zonename='UTC'/zonename='Asia/Shanghai'/g" ./package/base-files/files/bin/config_generate
 
 #最新golang
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+#rm -rf feeds/packages/lang/golang
+#git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # Modify default NTP server
 echo 'Modify default NTP server...'
-sed -i 's/ntp.aliyun.com/ntp.ntsc.ac.cn/' package/base-files/files/bin/config_generate
-sed -i 's/time1.cloud.tencent.com/ntp.aliyun.com/' package/base-files/files/bin/config_generate
-sed -i 's/time.ustc.edu.cn/cn.ntp.org.cn/' package/base-files/files/bin/config_generate
-sed -i 's/cn.pool.ntp.org/pool.ntp.org/' package/base-files/files/bin/config_generate
+sed -i 's/0.openwrt.pool.ntp.org/ntp.ntsc.ac.cn/' package/base-files/files/bin/config_generate
+sed -i 's/1.openwrt.pool.ntp.org/ntp.aliyun.com/' package/base-files/files/bin/config_generate
+sed -i 's/2.openwrt.pool.ntp.org/cn.ntp.org.cn/' package/base-files/files/bin/config_generate
+sed -i 's/3.openwrt.pool.ntp.org/pool.ntp.org/' package/base-files/files/bin/config_generate
 
 ######################################################################################################
 
