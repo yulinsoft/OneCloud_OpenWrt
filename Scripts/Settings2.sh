@@ -8,7 +8,7 @@ sed -i "s/192\.168\.[0-9]*\.[0-9]*/$OWRT_IP/g" ./package/base-files/files/bin/co
 sed -i "s/hostname='.*'/hostname='$OWRT_NAME'/g" ./package/base-files/files/bin/config_generate
 #修改默认时区
 sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/config_generate
-sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" ./package/base-files/files/bin/config_generate
+sed -i "s/zonename='UTC'/zonename='Asia/Shanghai'/g" ./package/base-files/files/bin/config_generate
 
 #最新golang
 rm -rf feeds/packages/lang/golang
@@ -38,10 +38,10 @@ sed -i 's/cn.pool.ntp.org/pool.ntp.org/' package/base-files/files/bin/config_gen
 #echo "DISTRIB_DESCRIPTION='$dist_info'" >> "$FILE"
 
 #添加编译日期标识
-cur_time=$(TZ=UTC-8 date +%y.%m.%d_%H.%M.%S)
-sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ $cur_time')/g" $(find ./feeds/luci/modules/luci-mod-status/ -type f -name "10_system.js")
+#cur_time=$(TZ=UTC-8 date +%y.%m.%d_%H.%M.%S)
+#sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ $cur_time')/g" $(find ./feeds/luci/modules/luci-mod-status/ -type f -name "10_system.js")
 #修改默认WIFI名
-sed -i "s/\.ssid=.*/\.ssid=Openwrt_WiFi/g" $(find ./package/kernel/mac80211/ ./package/network/config/ -type f -name "mac80211.*")
+#sed -i "s/\.ssid=.*/\.ssid=Openwrt_WiFi/g" $(find ./package/kernel/mac80211/ ./package/network/config/ -type f -name "mac80211.*")
 
 # 设置密码为password
 sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/' package/base-files/files/etc/shadow
@@ -53,9 +53,9 @@ sed -i '/customized in this file/a fs.file-max=102400\nnet.ipv4.neigh.default.gc
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # Modify default banner
-echo 'Modify default banner...'
-build_date=$(date +"%Y-%m-%d %H:%M:%S")
-echo "      %D %C ${build_date}                   " >> package/base-files/files/etc/banner
-echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
-echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
-echo "                                                               " >> package/base-files/files/etc/banner
+#echo 'Modify default banner...'
+#build_date=$(date +"%Y-%m-%d %H:%M:%S")
+#echo "      %D %C ${build_date}                   " >> package/base-files/files/etc/banner
+#echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
+#echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
+#echo "                                                               " >> package/base-files/files/etc/banner
