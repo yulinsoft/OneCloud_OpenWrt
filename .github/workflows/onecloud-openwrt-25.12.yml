@@ -13,7 +13,7 @@ on:
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-25.12
+  REPO_BRANCH: v25.12.6
   FEEDS_CONF: feeds.conf.default
   #DIY_P1_SH: Scripts/quick.sh
   DIY_P1_SH: Scripts/setup.sh
@@ -308,13 +308,13 @@ jobs:
       with:
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ env.OWRT_BRANCH }}_${{ env.OWRT_DATE }}
+        tag: Openwrt-${{ env.OWRT_BRANCH }}_${{ env.OWRT_DATE }}
         body: |
           自用玩客云一站式直刷固件[${{ matrix.brun_type }}]！
           请使用双USB公头线刷机！
           ==========🧊 基本信息 🧊==========
           💻 固件源码： ${{env.OWRT_SOURCE}}
-          💝 源码分支： ${{ env.OWRT_BRANCH }}
+          💝 源码分支： Openwrt-${{ env.OWRT_BRANCH }}
           🔑 默认密码： password
           🌐 默认地址： ${{env.OWRT_IP}}
         artifacts: ${{ env.FIRMWARE }}/*
